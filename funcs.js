@@ -62,9 +62,51 @@ const cipher = (str, key) => {
     return newString;
 } 
 
+const analyze = (arr) => {
+
+    const checkArr = () => {
+        return arr.some(num => typeof(num) !== 'number')
+    };
+
+    const length1 = arr.length;
+
+    const average = () => {
+        let sum = arr.reduce((prev, cur) => prev + cur, 0);
+        let av = sum / length1;
+        if (Number.isInteger(av)) {return av}
+        else {
+            let avStr = av.toFixed(1);
+            return parseFloat(avStr);
+        }
+    }
+
+    const minmax = () => {
+        let minNum = arr[0];
+        let maxNum = arr[0];
+        for (let i = 0; i < arr.length; i++) {
+            if (arr[i] < minNum) {minNum = arr[i]}
+            if (arr[i] > maxNum) {maxNum = arr[i]}
+        }
+        return [minNum, maxNum];
+    }
+
+    if (checkArr()) {throw new Error("Array must contain only numbers.")}
+    else {
+        let minmaxRes = minmax();
+        let avr = average();
+        return {
+            average: avr,
+            min: minmaxRes[0],
+            max: minmaxRes[1],
+            length: length1
+        }
+    }
+}
+
 export {
     capitalize,
     reverseString,
     calculator,
     cipher,
+    analyze,
 }

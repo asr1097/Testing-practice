@@ -2,7 +2,8 @@ import {
     capitalize,
     reverseString,
     calculator,
-    cipher } from "./funcs";
+    cipher,
+    analyze } from "./funcs";
 
 // capitalize
 
@@ -83,3 +84,27 @@ test ("ciphers full sentance", () => {
 test ("ciphers from z to a", () => {
     expect(cipher("Zaz", 3)).toMatch("Cdc")
 });
+
+// Array Analysis
+
+test("analize array 1", () => {
+    expect(analyze([1, 2, 3, 4, 5])).toEqual({
+        average: 3,
+        min: 1,
+        max: 5,
+        length: 5
+    })
+});
+
+test("analize array 2", () => {
+    expect(analyze([-2, 4, 6, 2])).toEqual({
+        average: 2.5,
+        min: -2,
+        max: 6,
+        length: 4
+    })
+})
+
+test("array with NaN", () => {
+    expect(() => analyze([1, 2, 3, "4", 5])).toThrow("Array must contain only numbers.");
+})
